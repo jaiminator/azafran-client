@@ -34,6 +34,8 @@ const Register = () => {
       if(res.ok) {
         alert("User registed");
         navigate("/login");
+      } else {
+        alert("INVALID_CREDENTIALS");
       }
      })
      .catch((error) => console.log(error))
