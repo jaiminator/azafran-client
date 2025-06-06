@@ -1,8 +1,10 @@
 import { Input, Button } from "antd"
 import { useState } from "react"
+import { useNavigate } from "react-router"
 import "./Register.scss"
 
 const Register = () => {
+  const navigate = useNavigate();
 
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
@@ -15,6 +17,26 @@ const Register = () => {
 
   const handlerRegisterButton = () => {
     console.log(user, password, repeatPassword);
+
+    // POST /register
+    // si el resultado es exitoso redirigir a /login
+     fetch("http://localhost:8080/users/register", {
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "POST",
+      body: JSON.stringify({
+        username: user,
+        password: password
+      })
+     })
+     .then((res) => {
+      if(res.ok) {
+        alert("User registed");
+        navigate("/login");
+      }
+     })
+     .catch((error) => console.log(error))
   }
 
   return (
