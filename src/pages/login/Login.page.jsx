@@ -8,11 +8,11 @@ const Login = () => {
 
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
-  const [infoLogin, setInfoLogin] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const isButtonEnabled = 
-    user && 
-    password;
+    user.trim() && 
+    password.trim();
 
   const handlerLoginButton = () => {
     console.log(user, password);
@@ -29,15 +29,16 @@ const Login = () => {
         password: password
       })
      })
-     .then((res) => {
-      if(res.ok) {
-        alert("User logged");
-        navigate("/ingredients");
+     .then(async (res) => {
+      const data = await res.json();
+      if (res.status >= 400 && data.msg) {
+        setErrorMsg(data.msg);
       } else {
-        setInfoLogin("INVALID CREDENTIALS");
+        localStorage.setItem("access_Token", data.accessToken);
+        navigate("/ingredients");
       }
-     })
-     .catch((error) => console.log(error))
+      })
+      .catch((error) => console.log(error))
   }
 
   return (
@@ -49,7 +50,8 @@ const Login = () => {
           type="text"
           value={user} 
           onChange={(e) => setUser(e.target.value)}
-          placeholder="Username...">
+          placeholder="Username..."
+          autoFocus>
         </Input>
         <Input 
           size="large"
@@ -58,8 +60,8 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password...">
         </Input>
-        <Button disabled={!isButtonEnabled} onClick={handlerLoginButton} type="primary">LOGIN</Button>
-        <h4>{infoLogin}</h4>
+        <Button disabled={!isButtonEnabled} onClick={handlerLoginButton} type="primary">LOG IN</Button>
+        <h4>{errorMsg}</h4>
       </div>
     </>
     

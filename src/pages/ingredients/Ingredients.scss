@@ -1,0 +1,15 @@
+$padding: 10px;
+
+.ingredientsTable {
+    border: 5px solid #0164bb;
+    border-radius: 10px;
+    padding: $padding;
+}
+
+.ingredientsTable th {
+    border-bottom: 1px solid black;
+}
+
+.ingredientsTable * {
+    padding: $padding;
+}
