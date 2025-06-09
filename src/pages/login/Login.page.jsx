@@ -15,7 +15,6 @@ const Login = () => {
     password.trim();
 
   const handlerLoginButton = () => {
-    console.log(user, password);
 
     // POST /login
     // si el resultado es exitoso redirigir a /ingredients
@@ -61,6 +60,7 @@ const Login = () => {
           placeholder="Password...">
         </Input>
         <Button disabled={!isButtonEnabled} onClick={handlerLoginButton} type="primary">LOG IN</Button>
+        <a onClick={() => navigate("/register")}>Don't you have a count? Let's register</a>
         <h4>{errorMsg}</h4>
       </div>
     </>

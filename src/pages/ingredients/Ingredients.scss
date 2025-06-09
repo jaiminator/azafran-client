@@ -13,3 +13,9 @@ $padding: 10px;
 .ingredientsTable * {
     padding: $padding;
 }
+
+.createIngredientContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
