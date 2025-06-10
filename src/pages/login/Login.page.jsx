@@ -34,6 +34,7 @@ const Login = () => {
         setErrorMsg(data.msg);
       } else {
         localStorage.setItem("access_Token", data.accessToken);
+        localStorage.setItem("user", user);
         navigate("/ingredients");
       }
       })
@@ -60,7 +61,7 @@ const Login = () => {
           placeholder="Password...">
         </Input>
         <Button disabled={!isButtonEnabled} onClick={handlerLoginButton} type="primary">LOG IN</Button>
-        <a onClick={() => navigate("/register")}>Don't you have a count? Let's register</a>
+        <a onClick={() => navigate("/register")}>Don't have you an account? Let's register</a>
         <h4>{errorMsg}</h4>
       </div>
     </>

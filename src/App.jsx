@@ -13,7 +13,7 @@ function App() {
           <Route path='/login' element={<Login/>}></Route>
           <Route path='/register' element={<Register/>}></Route>
           <Route path='/ingredients' element={<Ingredients/>}></Route>
-          {/* <Route path='*' element={<Login/>}></Route> */}
+          <Route path='/' element={<Ingredients/>}></Route> */
         </Routes>
       </BrowserRouter>
     </>
