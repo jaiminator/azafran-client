@@ -6,11 +6,13 @@ import { Ingredient } from "../../components/Ingredient";
 import "./Ingredients.scss"
 
 const Ingredients = () => {
-
+    
+    //Variables de estado iniciales
     const navigate = useNavigate();
     const accessToken = localStorage.getItem("access_Token");
     const localUser = localStorage.getItem("user");
     const [listIngredients, setListIngredients] = useState([]);
+    const [loading, setLoading] = useState(true);
     
     //Variables de estado para crear un ingrediente
     const [nameIngredient, setNameIngredient] = useState("");
@@ -49,24 +51,28 @@ const Ingredients = () => {
     }
     
     //RENDER COMPONENT
-    useEffect(() => {
-        if(!accessToken) {
-            alert("UNAUTHORIZED");
-            navigate("/login");
-        } else {
-            fetch("http://localhost:8080/ingredients", {
-                method: "GET",
-                headers: {
-                    "Content-type": "application/json",
-                    authorization: accessToken
-                }
-            })
-            .then((res) => res.json())
-            .then((data) => {
-                setListIngredients(data);
-            })
-        }
-    }, [])
+        useEffect(() => {
+            if(!accessToken) {
+                alert("UNAUTHORIZED");
+                navigate("/login");
+            } else {
+                fetch("http://localhost:8080/ingredients", {
+                    method: "GET",
+                    headers: {
+                        "Content-type": "application/json",
+                        authorization: accessToken
+                    }
+                })
+                .then((res) => res.json())
+                .then((data) => {
+                    setTimeout(() => {
+                        setListIngredients(data);
+                        setLoading(false);
+                    }, 2000)
+                    
+                })
+            }
+        }, [])
 
     return (
         <>
@@ -80,10 +86,12 @@ const Ingredients = () => {
                 <LogoutButton onClick={handleLogoutButton}></LogoutButton>
             </div>
             <h2>Ingredients</h2>
+            {loading ? (
+                <div className="loader"></div>
+            ) : (
             <table className="ingredientsTable">
                 <tbody>
                     <tr>
-                        {/* <th>ID</th> */}
                         <th>NAME</th>
                         <th>QUANTITY</th>
                     </tr>
@@ -94,6 +102,7 @@ const Ingredients = () => {
                     )} 
                 </tbody>
             </table>
+            )}
             <br />
             <div className="createIngredientContainer">
                 <h2>Create Ingredient</h2>

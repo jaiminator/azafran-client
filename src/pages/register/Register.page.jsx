@@ -9,6 +9,7 @@ const Register = () => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [msgRegister, setMsgRegister] = useState("");
 
   const isButtonEnabled = 
     user && 
@@ -16,7 +17,6 @@ const Register = () => {
     password == repeatPassword;
 
   const handlerRegisterButton = () => {
-    console.log(user, password, repeatPassword);
 
     // POST /register
     // si el resultado es exitoso redirigir a /login
@@ -35,7 +35,7 @@ const Register = () => {
         alert("User registed");
         navigate("/login");
       } else {
-        alert("INVALID_CREDENTIALS");
+        setMsgRegister("USER_ALREADY_EXISTS");
       }
      })
      .catch((error) => console.log(error))
@@ -71,6 +71,8 @@ const Register = () => {
           disabled={!isButtonEnabled}
           type="primary"
           onClick={handlerRegisterButton}>REGISTER</Button>
+
+          <h4>{msgRegister}</h4>
       </div>
     </>
     
