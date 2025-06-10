@@ -2,6 +2,7 @@ import { Input, Button } from "antd";
 import { useState, useEffect} from "react"
 import { useNavigate } from "react-router";
 import { LogoutButton } from "../../components/LogoutButton";
+import { Ingredient } from "../../components/Ingredient";
 import "./Ingredients.scss"
 
 const Ingredients = () => {
@@ -88,13 +89,7 @@ const Ingredients = () => {
                     </tr>
                     {listIngredients.map((ingredient, index) => {
                         return (
-                            <>
-                                <tr key={ingredient._id}>
-                                    {/* <td>{ingredient._id}</td> */}  
-                                    <td>{ingredient.name}</td>
-                                    <td>{ingredient.quantity}</td>
-                                </tr>
-                            </>
+                            <Ingredient key={index} name={ingredient.name} quantity={ingredient.quantity}  />
                         )}
                     )} 
                 </tbody>
