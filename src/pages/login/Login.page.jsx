@@ -1,9 +1,9 @@
 import { Input, Button } from "antd"
 import { useState } from "react"
-import { useNavigate } from "react-router"
+import { Link, useNavigate } from "react-router"
 import "./Login.scss"
 
-const Login = () => {
+const Login = ({handleLinkClick}) => {
   const navigate = useNavigate();
 
   const [user, setUser] = useState("");
@@ -61,7 +61,7 @@ const Login = () => {
           placeholder="Password...">
         </Input>
         <Button disabled={!isButtonEnabled} onClick={handlerLoginButton} type="primary">LOG IN</Button>
-        <a onClick={() => navigate("/register")}>Don't have you an account? Let's register</a>
+        <Link onClick={handleLinkClick} to={"/register"}>Don't have you an account? Let's register</Link>
         <h4>{errorMsg}</h4>
       </div>
     </>

@@ -94,10 +94,11 @@ const Ingredients = () => {
                     <tr>
                         <th>NAME</th>
                         <th>QUANTITY</th>
+                        <th>BUTTON TEST</th>
                     </tr>
                     {listIngredients.map((ingredient, index) => {
                         return (
-                            <Ingredient key={index} name={ingredient.name} quantity={ingredient.quantity}  />
+                            <Ingredient key={index} name={ingredient.name} quantity={ingredient.quantity} handleButtonClick={() => console.log(ingredient.name)}  />
                         )}
                     )} 
                 </tbody>
