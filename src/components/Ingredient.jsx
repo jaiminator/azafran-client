@@ -4,7 +4,6 @@ const Ingredient = ({name, quantity, handleButtonClick}) => {
         <tr>
             <td>{name}</td>
             <td>{quantity}</td>
-            <td><button onClick={handleButtonClick}>BUTTON</button></td>
         </tr>
     </>
   )

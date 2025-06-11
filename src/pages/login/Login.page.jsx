@@ -1,10 +1,9 @@
 import { Input, Button } from "antd"
 import { useState } from "react"
-import { Link, useNavigate } from "react-router"
+import { Link } from "react-router"
 import "./Login.scss"
 
-const Login = ({handleLinkClick}) => {
-  const navigate = useNavigate();
+const Login = () => {
 
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
@@ -35,7 +34,7 @@ const Login = ({handleLinkClick}) => {
       } else {
         localStorage.setItem("access_Token", data.accessToken);
         localStorage.setItem("user", user);
-        navigate("/ingredients");
+        window.location.href = "/";
       }
       })
       .catch((error) => console.log(error))
@@ -61,7 +60,7 @@ const Login = ({handleLinkClick}) => {
           placeholder="Password...">
         </Input>
         <Button disabled={!isButtonEnabled} onClick={handlerLoginButton} type="primary">LOG IN</Button>
-        <Link onClick={handleLinkClick} to={"/register"}>Don't have you an account? Let's register</Link>
+        <Link to={"/register"}>Don't have you an account? Let's register</Link>
         <h4>{errorMsg}</h4>
       </div>
     </>

@@ -1,14 +1,13 @@
 import { Input, Button } from "antd";
 import { useState, useEffect} from "react"
-import { useNavigate } from "react-router";
 import { LogoutButton } from "../../components/LogoutButton";
 import { Ingredient } from "../../components/Ingredient";
 import "./Ingredients.scss"
+import { Link, Navigate } from "react-router";
 
 const Ingredients = () => {
     
     //Variables de estado iniciales
-    const navigate = useNavigate();
     const accessToken = localStorage.getItem("access_Token");
     const localUser = localStorage.getItem("user");
     const [listIngredients, setListIngredients] = useState([]);
@@ -47,31 +46,25 @@ const Ingredients = () => {
     //LOGOUT
     const handleLogoutButton = () => {
         localStorage.clear();
-        navigate("/login");
+        window.location.href = "/login";
     }
     
     //RENDER COMPONENT
         useEffect(() => {
-            if(!accessToken) {
-                alert("UNAUTHORIZED");
-                navigate("/login");
-            } else {
-                fetch("http://localhost:8080/ingredients", {
-                    method: "GET",
-                    headers: {
-                        "Content-type": "application/json",
-                        authorization: accessToken
-                    }
-                })
-                .then((res) => res.json())
-                .then((data) => {
-                    setTimeout(() => {
-                        setListIngredients(data);
-                        setLoading(false);
-                    }, 2000)
-                    
-                })
-            }
+            fetch("http://localhost:8080/ingredients", {
+                method: "GET",
+                headers: {
+                    "Content-type": "application/json",
+                    authorization: accessToken
+                }
+            })
+            .then((res) => res.json())
+            .then((data) => {
+                setTimeout(() => {
+                    setListIngredients(data);
+                    setLoading(false);
+                }, 2000)
+            })
         }, [])
 
     return (
@@ -94,11 +87,10 @@ const Ingredients = () => {
                     <tr>
                         <th>NAME</th>
                         <th>QUANTITY</th>
-                        <th>BUTTON TEST</th>
                     </tr>
                     {listIngredients.map((ingredient, index) => {
                         return (
-                            <Ingredient key={index} name={ingredient.name} quantity={ingredient.quantity} handleButtonClick={() => console.log(ingredient.name)}  />
+                            <Ingredient key={index} name={ingredient.name} quantity={ingredient.quantity} />
                         )}
                     )} 
                 </tbody>
