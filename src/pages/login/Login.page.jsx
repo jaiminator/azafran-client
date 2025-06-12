@@ -1,6 +1,7 @@
 import { Input, Button } from "antd"
 import { useState } from "react"
 import { Link } from "react-router"
+import { Header } from "../../components/Header"
 import "./Login.scss"
 
 const Login = () => {
@@ -42,6 +43,7 @@ const Login = () => {
 
   return (
     <>
+      <Header />
       <div className="loginContainer">
         <h1>Login</h1>
         <Input 

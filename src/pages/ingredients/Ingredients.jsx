@@ -1,9 +1,9 @@
 import { Input, Button } from "antd";
 import { useState, useEffect} from "react"
+import { Header } from "../../components/Header";
 import { LogoutButton } from "../../components/LogoutButton";
 import { Ingredient } from "../../components/Ingredient";
 import "./Ingredients.scss"
-import { Link, Navigate } from "react-router";
 
 const Ingredients = () => {
     
@@ -69,6 +69,7 @@ const Ingredients = () => {
 
     return (
         <>
+            <Header />
             <div className="headerUser">
                 <h2 style={
                 {

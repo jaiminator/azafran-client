@@ -1,6 +1,7 @@
 import { Input, Button } from "antd"
 import { useState } from "react"
 import { useNavigate } from "react-router"
+import { Header } from "../../components/Header"
 import "./Register.scss"
 
 const Register = () => {
@@ -43,6 +44,7 @@ const Register = () => {
 
   return (
     <>
+      <Header />
       <div className="registerContainer">
         <h1>Register</h1>
 
